@@ -1,11 +1,10 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect
+from pages.inventory_page import InventoryPage
 
-def test_menu_navigation(logged_in_page: Page):
-    # 1. Open side menu using accessible role locator
-    logged_in_page.get_by_role("button", name="Open Menu").click()
-
-    # 2. Click About link
-    logged_in_page.get_by_role("link", name="About").click()
-
-    # 3. Web-first assertion (auto-waits for URL redirect)
-    expect(logged_in_page).to_have_url("https://saucelabs.com/")
+def test_menu_navigation(api_logged_in_page):
+    inventory_page = InventoryPage(api_logged_in_page)
+    
+    inventory_page.open_menu()
+    inventory_page.click_about_link()
+    
+    expect(api_logged_in_page).to_have_url("https://saucelabs.com/")
