@@ -9,6 +9,7 @@ class InventoryPage:
     def open_menu(self):
         self.menu_button.click()
         expect(self.about_sidebar_link).to_be_visible(timeout=3000)
+        
 
     def click_about_link(self):
         self.about_sidebar_link.click()
